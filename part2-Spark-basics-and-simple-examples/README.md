@@ -53,3 +53,33 @@ it returns 1,4,9,16
 ##### The most important charcteristic of Spark:
 It is lazy, which means nothing actually happens in the driver program, until an action is called.
 
+RDD's can hold key-value pairs as well as single values. For example: number of friends by age.
+
+the key is age and the value is the number of friends.
+
+##### Spark's special operations with key-value pairs:
+
+- ReduceByKey(): combine values with the same key using some function. example: rdd.reduceByKey(lambda x,y: x+y)
+- groupByKey(): group values with the same key
+- sortByKey(): sort rdd values by key
+- keys(), values(): create an RDD of just the keys, or just the values.
+- with value-key pairs, we use mapValues() and faltMapValues() instead of map() and flatMap() if the transformation doesn't affect the keys.
+
+__Friends by age example:__ 
+
+we make value pairs for age and friends for each line. Then we convert the values to another pair that the second value is 1. we do it becuase later we want to count the occurance of each line.
+for example: (33, 385) => (33,(385,1))
+
+Then next step is, with reduceByKey() for each value pair like (385, 1) in the example above, we sum up the first, and second number to see how many friends each person has, and how many times the age repeats.
+
+And because we want the average for each age, we write another lambda, to divide first value to the second which is the sum divided by count. Don't forget when we don't want the keys to be touched, we have to use mapValues().
+
+__Filtering RDD example:__
+
+It uses the concept of key-pair values in RDD and filter() functionality that means we get rid of the data we don't care about and just return the data we need. here is the code:
+
+```
+minTemps = parsedLines.filter(lambda x: "TMIN" in x[1])
+```
+
+It says for each row, if the field no 1 (which is the status) equals "TMIN", then keep it, otherwise drop it.
