@@ -83,3 +83,26 @@ minTemps = parsedLines.filter(lambda x: "TMIN" in x[1])
 ```
 
 It says for each row, if the field no 1 (which is the status) equals "TMIN", then keep it, otherwise drop it.
+
+__Finding the words in a text file:__
+
+We use flatMap() function here to split each line as separate words. Then we count words by using countByValue() function. 
+Also we tell python if any word is not ascii format, which means anything weird, just ignore them and call them cleanWord then show how many of them are found.
+
+We can see the code in a file called word-count.py or word-count.ipynp
+
+- The result of this code however, is not so great because it includes non-alphabetical characters, and some noise. In order to have better results, we can use regEx to filter out some of the noise.
+
+We can see the code in this file: word-count-better.py or word-count-better.ipynb
+
+__IMPORTANT:__
+I sorted the values by descending order. here is the line:
+```
+import operator
+sorted_wordCounts = sorted(wordCounts.items(), key=lambda x: (-x[1], x[0]))
+```   
+(check the jupyter notebook mentioned above)
+
+This is so much easier than he did in the code called: word-count-better-sorted.py
+
+
