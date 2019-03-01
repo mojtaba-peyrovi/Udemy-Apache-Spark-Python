@@ -71,5 +71,22 @@ to something like this:
 
 9999 is the default distance. (infinite)
 
+the code is here: degrees-of-separation.py
 
+##### Collaborative FIltering on MovieLens dataset:
 
+The instructions can be found at this image: 
+(instructions-for-collaborative-filtering.JPG)
+
+```
+when we have a heavy task, we can use all the cpu cores for spark by simply say .setMaster("local[*]") rather than local.
+```
+
+  - Any time we have to make the RDD for more than once, which is so expensive and time-consuming, we can tel spark to cache() or insist() it so that it doesn't re generate teh RDD.
+  
+__Self Join in Spark:__ It is so simple, we just say:
+```
+joined_df = df.join(df)
+``` 
+   
+We used cosineSimilarity technique. we can see the code at movie-similarities.py
